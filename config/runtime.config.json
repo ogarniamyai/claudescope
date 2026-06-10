@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "minClientVersion": "1.0.0",
+  "notice": {
+    "id": "",
+    "level": "info",
+    "text": null
+  },
+  "selfUpdate": {
+    "configUrl": "https://cdn.jsdelivr.net/gh/ogarniamyai/claudex@main/config/runtime.config.json"
+  },
+  "poll": {
+    "usageSeconds": 15
+  },
+  "capture": {
+    "match": "/completion",
+    "modelPath": "model"
+  },
+  "org": {
+    "url": "https://claude.ai/api/bootstrap",
+    "pick": [
+      "organization_id",
+      "organizationId",
+      "account.organization_id",
+      "organizations[0].id",
+      "memberships[0].organization.uuid"
+    ],
+    "fallbackUrl": "https://claude.ai/api/account",
+    "fallbackPick": [
+      "organization_id",
+      "memberships[0].organization.uuid"
+    ]
+  },
+  "sources": {
+    "usage": {
+      "url": "https://claude.ai/api/organizations/{org}/usage",
+      "fields": {
+        "sessionPct": { "path": "five_hour.utilization", "as": "number", "fallback": 0 },
+        "sessionReset": { "path": "five_hour.resets_at", "as": "instant", "fallback": null },
+        "weekPct": { "path": "seven_day.utilization", "as": "number", "fallback": 0 },
+        "weekReset": { "path": "seven_day.resets_at", "as": "instant", "fallback": null }
+      }
+    },
+    "billing": {
+      "url": "https://claude.ai/api/organizations/{org}/subscription_details",
+      "fields": {
+        "nextChargeDate": { "path": "next_charge_date", "as": "day", "fallback": null },
+        "nextChargeInstant": { "path": "next_charge_at", "as": "instant", "fallback": null },
+        "status": { "path": "status", "as": "text", "fallback": "unknown" },
+        "interval": { "path": "billing_interval", "as": "text", "fallback": "monthly" }
+      }
+    }
+  },
+  "peak": {
+    "timezone": "America/Los_Angeles",
+    "windows": [
+      { "days": [1, 2, 3, 4, 5], "from": 5, "to": 11 }
+    ]
+  },
+  "thresholds": {
+    "warn": 51,
+    "danger": 81,
+    "renewalAlertDays": 3
+  },
+  "dict": {
+    "status": {
+      "active": "aktywny",
+      "inactive": "nieaktywny",
+      "canceled": "anulowany",
+      "cancelled": "anulowany",
+      "past_due": "zaległy",
+      "trialing": "okres próbny",
+      "paused": "wstrzymany",
+      "incomplete": "niepełny",
+      "unknown": "nieznany"
+    },
+    "interval": {
+      "monthly": "miesięczny",
+      "month": "miesięczny",
+      "yearly": "roczny",
+      "annual": "roczny",
+      "annually": "roczny",
+      "weekly": "tygodniowy"
+    }
+  }
+}

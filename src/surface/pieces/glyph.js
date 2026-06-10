@@ -1,0 +1,57 @@
+(function (root) {
+  const OG = root.OG;
+  const api = root.chrome || root.browser;
+  let seq = 0;
+
+  const HEX = "157.94 0 315.89 87.75 315.89 245.69 157.94 333.44 0 245.69 0 87.75 157.94 0";
+
+  function mark(size) {
+    const w = size || 30;
+    const h = Math.round((w * 333.44) / 315.89);
+    const id = "ogmark" + seq;
+    seq += 1;
+    return (
+      '<svg viewBox="0 0 315.89 333.44" width="' + w + '" height="' + h + '" aria-hidden="true">' +
+      '<defs><clipPath id="' + id + '"><polygon points="' + HEX + '"/></clipPath></defs>' +
+      '<polygon points="' + HEX + '" fill="#2563eb"/>' +
+      '<g clip-path="url(#' + id + ')">' +
+      '<g fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="8.75" stroke-width="16.67">' +
+      '<line x1="157.94" y1="166.72" x2="157.94" y2="52.65"/>' +
+      '<line x1="157.94" y1="166.72" x2="237.71" y2="120.65"/>' +
+      '<line x1="157.94" y1="166.72" x2="256.75" y2="223.75"/>' +
+      '<line x1="157.94" y1="166.72" x2="157.94" y2="250.08"/>' +
+      '<line x1="157.94" y1="166.72" x2="59.14" y2="223.75"/>' +
+      '<line x1="157.94" y1="166.72" x2="78.18" y2="120.65"/>' +
+      "</g>" +
+      '<g fill="#fff">' +
+      '<circle cx="157.94" cy="52.65" r="22.81"/>' +
+      '<circle cx="237.71" cy="120.65" r="18.43"/>' +
+      '<circle cx="256.75" cy="223.75" r="22.81"/>' +
+      '<circle cx="157.94" cy="250.08" r="18.43"/>' +
+      '<circle cx="59.14" cy="223.75" r="22.81"/>' +
+      '<circle cx="78.18" cy="120.65" r="18.43"/>' +
+      '<circle cx="157.94" cy="166.72" r="36.85"/>' +
+      "</g></g></svg>"
+    );
+  }
+
+  function logoUrl() {
+    try {
+      return api.runtime.getURL("assets/logo-inverted.svg");
+    } catch (err) {
+      void err;
+      return "";
+    }
+  }
+
+  function lockup() {
+    return (
+      '<div class="og-lock">' +
+      '<img class="og-lock-logo" src="' + logoUrl() + '" alt="ogarniamy.ai">' +
+      '<span class="og-lock-tag">' + (OG.product || "ClaudeX") + "</span>" +
+      "</div>"
+    );
+  }
+
+  OG.glyph = { mark: mark, lockup: lockup };
+})(typeof globalThis !== "undefined" ? globalThis : window);

@@ -1,0 +1,58 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve version from tag
+        id: ver
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Sync manifest version with tag
+        run: |
+          jq --arg v "${{ steps.ver.outputs.version }}" '.version = $v' manifest.json > manifest.tmp
+          mv manifest.tmp manifest.json
+
+      - name: Stage common payload
+        run: |
+          mkdir -p stage
+          cp -r assets config src manifest.json stage/
+
+      - name: Build Chrome zip
+        run: |
+          mkdir -p dist
+          cp -r stage chrome
+          (cd chrome && zip -qr "../dist/claudex-chrome-${{ steps.ver.outputs.version }}.zip" .)
+
+      - name: Build Firefox signed XPI
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: |
+          cp -r stage firefox
+          jq '. + {browser_specific_settings: {gecko: {id: "claudex@ogarniamy.ai", strict_min_version: "115.0"}}}' \
+            firefox/manifest.json > firefox/manifest.tmp
+          mv firefox/manifest.tmp firefox/manifest.json
+          npx --yes web-ext@8 sign \
+            --source-dir=firefox \
+            --artifacts-dir=dist \
+            --channel=unlisted
+          mv dist/*.xpi "dist/claudex-firefox-${{ steps.ver.outputs.version }}.xpi"
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/claudex-chrome-${{ steps.ver.outputs.version }}.zip
+            dist/claudex-firefox-${{ steps.ver.outputs.version }}.xpi
+          generate_release_notes: true
