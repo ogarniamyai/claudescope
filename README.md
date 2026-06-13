@@ -27,27 +27,7 @@ Pobierz paczkę dla swojej przeglądarki z [najnowszej wersji](https://github.co
 3. Potwierdź instalację w oknie dialogowym.
 4. Gotowe – otwórz claude.ai, a panel pojawi się przy prawej krawędzi okna.
 
-### Safari (macOS)
-
-Paczka dla Safari nie jest podpisana certyfikatem Apple Developer, więc instalacja wymaga kilku dodatkowych kroków. Działa na macOS 13+ i Safari 16+.
-
-1. Pobierz `claudex-safari-*.zip` i rozpakuj go (Finder zrobi to dwukliknięciem).
-2. Przeciągnij **ClaudeX.app** do folderu **Programy** (Applications).
-3. Uruchom **ClaudeX.app** po raz pierwszy: kliknij prawym przyciskiem → **Otwórz** → **Otwórz** w oknie ostrzeżenia Gatekeepera. Jeśli macOS w ogóle nie pozwala otworzyć aplikacji, wejdź w **Ustawienia systemowe → Prywatność i ochrona** i kliknij **Otwórz mimo to** przy wpisie ClaudeX.
-
-   Jeśli zamiast tego widzisz komunikat **„ClaudeX jest uszkodzona i nie można jej otworzyć"** – to flaga kwarantanny nadana przez przeglądarkę przy pobraniu, nie realne uszkodzenie. Otwórz Terminal i uruchom:
-
-   ```sh
-   xattr -dr com.apple.quarantine /Applications/ClaudeX.app
-   ```
-
-   Potem otwórz aplikację ponownie.
-4. Włącz tryb deweloperski w Safari (jednorazowo): **Safari → Ustawienia → Zaawansowane** → zaznacz **„Pokaż funkcje dla programistów witryn"**.
-5. W menu **Programuj** (Develop) zaznacz **„Zezwalaj na niepodpisane rozszerzenia"** (Allow Unsigned Extensions). **Uwaga:** Safari resetuje to ustawienie po każdym zamknięciu aplikacji – po restarcie Safari trzeba je włączyć ponownie.
-6. Wejdź w **Safari → Ustawienia → Rozszerzenia**, znajdź **ClaudeX** na liście i włącz je. Przy pierwszym uruchomieniu Safari poprosi o zgodę na dostęp do `claude.ai` – zatwierdź.
-7. Otwórz claude.ai – panel pojawi się przy prawej krawędzi okna.
-
-**Aktualizacja**: aby zaktualizować wtyczkę w Firefoksie, pobierz nowy plik `.xpi` i otwórz go w przeglądarce – instalacja zostanie zaktualizowana automatycznie. W przeglądarkach Chromium wystarczy zastąpić pliki w folderze, z którego ładowana jest wtyczka, i kliknąć przycisk odświeżenia w `chrome://extensions`. W Safari zastąp `ClaudeX.app` w folderze Programy nową wersją i ponownie uruchom Safari (pamiętając o włączeniu „Allow Unsigned Extensions").
+**Aktualizacja**: aby zaktualizować wtyczkę, pobierz nowy plik `.xpi` i otwórz go w Firefoksie – instalacja zostanie zaktualizowana automatycznie. W przeglądarkach Chromium wystarczy zastąpić pliki w folderze, z którego ładowana jest wtyczka, i kliknąć przycisk odświeżenia w `chrome://extensions`.
 
 ## Funkcjonalności
 

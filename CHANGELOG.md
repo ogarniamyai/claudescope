@@ -2,6 +2,15 @@
 
 Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowanie wg [SemVer](https://semver.org/).
 
+## [1.1.2] – 2026-06-13
+
+### Usunięte
+- Build dla Safari (`claudex-safari-*.zip`) został wycofany. Na macOS 15+ Safari Web Extensions wymagają podpisu Apple Developer ID, żeby PluginKit zarejestrował `.appex` – niepodpisana paczka nie jest możliwa do zainstalowania nawet z włączonym „Allow Unsigned Extensions". Wracamy do tematu, gdy podpis Apple Developer ID będzie dostępny.
+
+### Zmienione
+- Workflow `release.yml` zredukowany do `build-web` + `publish` (job `build-safari` usunięty).
+- README: usunięta sekcja instalacji w Safari.
+
 ## [1.1.1] – 2026-06-13
 
 ### Naprawione
@@ -26,6 +35,7 @@ Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowan
 - Panel szczegółowy: rozkład promptów według modelu, limity sesji, szczegóły subskrypcji, mapa godzin szczytu, historia aktywności.
 - Build i automatyczna publikacja paczek `claudex-chrome-*.zip` oraz podpisanego `claudex-firefox-*.xpi` z GitHub Actions po push'u taga `v*`.
 
+[1.1.2]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.2
 [1.1.1]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.1
 [1.1.0]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.0
 [1.0.0]: https://github.com/ogarniamyai/claudex/releases/tag/v1.0.0
