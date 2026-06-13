@@ -1,6 +1,6 @@
 # ClaudeX
 
-ClaudeX to wtyczka do przeglądarki, która pokazuje na bieżąco wszystko, co warto wiedzieć o swoim koncie claude.ai – wykorzystanie limitów, czas pracy, datę odnowienia subskrypcji, godziny szczytu. Wszystko liczy się lokalnie w Twojej przeglądarce – żadne dane nigdzie nie wychodzą.
+ClaudeX to wtyczka do przeglądarki, która pokazuje na bieżąco wszystko, co warto wiedzieć o swoim koncie claude.ai: wykorzystanie limitów, czas pracy, datę odnowienia subskrypcji, godziny szczytu. Wszystko liczy się lokalnie w Twojej przeglądarce, żadne dane nigdzie nie wychodzą.
 
 Stworzone przez [ogarniamy.ai](https://ogarniamy.ai).
 
@@ -10,7 +10,7 @@ Pobierz paczkę dla swojej przeglądarki z [najnowszej wersji](https://github.co
 
 ### Chrome, Edge, Brave, Opera, Vivaldi, Arc
 
-1. Pobierz `claudex-chrome-*.zip` i rozpakuj do dowolnego folderu (folder musi pozostać na dysku – przeglądarka ładuje wtyczkę bezpośrednio z niego).
+1. Pobierz `claudex-chrome-*.zip` i rozpakuj do dowolnego folderu (folder musi pozostać na dysku, bo przeglądarka ładuje wtyczkę bezpośrednio z niego).
 2. Otwórz stronę zarządzania rozszerzeniami:
    - **Chrome**: wpisz `chrome://extensions` w pasku adresu
    - **Edge**: wpisz `edge://extensions`
@@ -18,16 +18,16 @@ Pobierz paczkę dla swojej przeglądarki z [najnowszej wersji](https://github.co
    - **Opera**: wpisz `opera://extensions`
 3. W prawym górnym rogu włącz **„Tryb dewelopera"**.
 4. Kliknij **„Załaduj rozpakowane"** i wskaż folder z rozpakowaną wtyczką.
-5. Gotowe – otwórz claude.ai, a panel pojawi się przy prawej krawędzi okna.
+5. Gotowe. Otwórz claude.ai, a panel pojawi się przy prawej krawędzi okna.
 
 ### Firefox
 
 1. Pobierz `claudex-firefox-*.xpi`.
 2. Otwórz plik w Firefoksie (przeciągnij na okno przeglądarki lub użyj **Plik → Otwórz plik**).
 3. Potwierdź instalację w oknie dialogowym.
-4. Gotowe – otwórz claude.ai, a panel pojawi się przy prawej krawędzi okna.
+4. Gotowe. Otwórz claude.ai, a panel pojawi się przy prawej krawędzi okna.
 
-**Aktualizacja**: aby zaktualizować wtyczkę, pobierz nowy plik `.xpi` i otwórz go w Firefoksie – instalacja zostanie zaktualizowana automatycznie. W przeglądarkach Chromium wystarczy zastąpić pliki w folderze, z którego ładowana jest wtyczka, i kliknąć przycisk odświeżenia w `chrome://extensions`.
+**Aktualizacja**: aby zaktualizować wtyczkę, pobierz nowy plik `.xpi` i otwórz go w Firefoksie. Instalacja zostanie zaktualizowana automatycznie. W przeglądarkach Chromium wystarczy zastąpić pliki w folderze, z którego ładowana jest wtyczka, i kliknąć przycisk odświeżenia w `chrome://extensions`.
 
 ## Funkcjonalności
 
@@ -39,16 +39,16 @@ Po załadowaniu wtyczki na claude.ai przy prawej krawędzi okna pojawia się kom
 
 Od góry znajdują się:
 
-- **Limit 5-godzinny** – pasek postępu z procentem wykorzystania oraz czasem do resetu.
-- **Limit tygodniowy (7-dniowy)** – pasek postępu z procentem wykorzystania oraz czasem do resetu.
-- **Cykl rozliczeniowy subskrypcji** – wskaźnik pokazujący odsetek wykorzystanych dni i liczbę dni pozostałych do odnowienia (kilka dni przed końcem cyklu wyświetla się ostrzeżenie).
-- **Czas aktywności** – licznik czasu spędzonego w claude.ai. Liczy tylko wtedy, gdy karta jest aktywna i okno przeglądarki jest w użyciu.
-- **Wskaźnik godzin szczytu** – informuje, czy aktualna pora to godziny szczytu (peak hours), w których prompty zużywają więcej z limitu.
-- **Przycisk z ikoną wykresu** – otwiera panel ze szczegółowymi danymi.
+- **Limit 5-godzinny**: pasek postępu z procentem wykorzystania oraz czasem do resetu.
+- **Limit tygodniowy (7-dniowy)**: pasek postępu z procentem wykorzystania oraz czasem do resetu.
+- **Cykl rozliczeniowy subskrypcji**: wskaźnik pokazujący odsetek wykorzystanych dni i liczbę dni pozostałych do odnowienia (kilka dni przed końcem cyklu wyświetla się ostrzeżenie).
+- **Czas aktywności**: licznik czasu spędzonego w claude.ai. Liczy tylko wtedy, gdy karta jest aktywna i okno przeglądarki jest w użyciu.
+- **Wskaźnik godzin szczytu**: informuje, czy aktualna pora to godziny szczytu (peak hours), w których prompty zużywają więcej z limitu.
+- **Przycisk z ikoną wykresu**: otwiera panel ze szczegółowymi danymi.
 
 Na lewej krawędzi panelu znajduje się **mała strzałka**, która zwija panel boczny do wąskiego paska. Przydaje się, gdy chcesz odsłonić więcej miejsca w interfejsie claude.ai, ale jednocześnie chcesz, aby wtyczka pozostała aktywna.
 
-### Panel szczegółowy – prompty według modelu
+### Panel szczegółowy, prompty według modelu
 
 Po kliknięciu przycisku z ikoną wykresu otwiera się panel szczegółowy. Sekcja **„PROMPTY"** prezentuje rozkład Twoich zapytań pomiędzy modele Claude:
 
@@ -110,26 +110,26 @@ Wtyczka odświeża dane z claude.ai automatycznie (domyślnie co 15 sekund). Je�
 - Komunikat o błędzie pojawia się bezpośrednio na panelu bocznym.
 - Ostatnia znana wartość pozostaje widoczna, dopóki nie uda się pobrać świeżych danych.
 - Wtyczka samodzielnie ponawia próby połączenia w tle.
-- Brakujące wartości są oznaczone myślnikiem („–"), żeby nie wprowadzać w błąd zerami.
+- Brakujące wartości są oznaczone myślnikiem, żeby nie wprowadzać w błąd zerami.
 
 Sygnalizowane są również inne ważne komunikaty:
 
-- **Komunikaty od autora wtyczki** – np. informacje o nowych wersjach lub istotne ostrzeżenia. Kolor ramki zależy od wagi: niebieska dla informacji, żółta dla ostrzeżeń.
-- **Błędy połączenia z claude.ai** – gdy nie udaje się pobrać aktualnych danych, ramka komunikatu jest czerwona (zarówno na panelu bocznym, jak i w panelu szczegółowym).
+- **Komunikaty od autora wtyczki**: np. informacje o nowych wersjach lub istotne ostrzeżenia. Kolor ramki zależy od wagi: niebieska dla informacji, żółta dla ostrzeżeń.
+- **Błędy połączenia z claude.ai**: gdy nie udaje się pobrać aktualnych danych, ramka komunikatu jest czerwona (zarówno na panelu bocznym, jak i w panelu szczegółowym).
 - **Pulsujący przycisk menu** na panelu bocznym sygnalizuje, że pojawiła się informacja warta sprawdzenia.
 
 ## Prywatność
 
-Wtyczka ma dostęp **wyłącznie do claude.ai** – do żadnej innej strony. Wszystkie obliczenia wykonują się lokalnie w Twojej przeglądarce, a dane nie są wysyłane na żaden zewnętrzny serwer. Bez kont, bez logowania, bez śledzenia.
+Wtyczka ma dostęp **wyłącznie do claude.ai**, do żadnej innej strony. Wszystkie obliczenia wykonują się lokalnie w Twojej przeglądarce, a dane nie są wysyłane na żaden zewnętrzny serwer. Bez kont, bez logowania, bez śledzenia.
 
 Pełna polityka prywatności: [PRIVACY.md](PRIVACY.md).
 
 ## Licencja i znaki towarowe
 
-Kod jest **publicznie widoczny wyłącznie dla transparencji** – żeby każdy mógł sprawdzić, że wtyczka nie wysyła nigdzie żadnych danych. To **nie jest open source**.
+Kod jest **publicznie widoczny wyłącznie dla transparencji**, żeby każdy mógł sprawdzić, że wtyczka nie wysyła nigdzie żadnych danych. To **nie jest open source**.
 
 Możesz:
-- zainstalować i używać oficjalnej wersji wtyczki ze sklepu Chrome / Mozilla,
+- zainstalować i używać oficjalnej wersji wtyczki ze sklepu Chrome lub Mozilla,
 - czytać i sprawdzać kod źródłowy dla własnej oceny bezpieczeństwa.
 
 Bez zgody ogarniamy.ai **nie wolno**:
@@ -137,4 +137,4 @@ Bez zgody ogarniamy.ai **nie wolno**:
 - publikować forka, klona ani przepakowanej wersji wtyczki w sklepie lub gdziekolwiek indziej,
 - używać nazwy „ClaudeX", „ogarniamy.ai" ani znaku marki w innych produktach.
 
-Pełny tekst: [LICENSE](LICENSE). Pull requesty nie są przyjmowane – błędy i sugestie zgłaszaj przez [issues na GitHubie](https://github.com/ogarniamyai/claudex/issues).
+Pełny tekst: [LICENSE](LICENSE). Pull requesty nie są przyjmowane. Błędy i sugestie zgłaszaj przez [issues na GitHubie](https://github.com/ogarniamyai/claudex/issues).

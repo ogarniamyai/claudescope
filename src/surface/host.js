@@ -60,7 +60,6 @@
     function paint(snap, seconds, peakState, cycle, active) {
       guard("rail", function () {
         rail.render(snap, seconds, peakState, cycle, active);
-        // Check for alerts: snap.error or health notice
         const h = OG.settings.health();
         const hasAlert = (snap && snap.error) || (h.outdated) || (h.notice);
         rail.setAlert(hasAlert);

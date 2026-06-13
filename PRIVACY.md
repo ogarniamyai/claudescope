@@ -10,7 +10,7 @@ ClaudeX to rozszerzenie do przeglądarki tworzone przez **ogarniamy.ai**, które
 
 ### Jakie dane są zbierane?
 
-**Żadne nie opuszczają Twojej przeglądarki.** ClaudeX nie wysyła nic na żaden zewnętrzny serwer — nie ma serwera ClaudeX.
+**Żadne nie opuszczają Twojej przeglądarki.** ClaudeX nie wysyła nic na żaden zewnętrzny serwer. Po prostu nie ma serwera ClaudeX.
 
 Wszystko co rozszerzenie robi:
 
@@ -28,8 +28,8 @@ Nikomu. Brak zewnętrznych serwerów, brak analityki, brak śledzenia, brak rekl
 
 ### Z jakich uprawnień korzysta rozszerzenie?
 
-- **`storage`** — do zapisu danych lokalnie w przeglądarce
-- **`host_permissions: https://claude.ai/*`** — żeby móc odczytywać dane Twojego konta wyłącznie na stronie `claude.ai`. Rozszerzenie nie ma dostępu do żadnej innej strony.
+- `storage`, do zapisu danych lokalnie w przeglądarce.
+- `host_permissions: https://claude.ai/*`, żeby móc odczytywać dane Twojego konta wyłącznie na stronie `claude.ai`. Rozszerzenie nie ma dostępu do żadnej innej strony.
 
 ### Konta, logowanie, śledzenie
 
@@ -49,7 +49,7 @@ ClaudeX is a browser extension built by **ogarniamy.ai** that surfaces your clau
 
 ### What data is collected?
 
-**None of it leaves your browser.** ClaudeX has no backend — there is no ClaudeX server.
+**None of it leaves your browser.** ClaudeX has no backend. There is no ClaudeX server.
 
 What the extension does:
 
@@ -67,8 +67,8 @@ Nobody. No remote servers, no analytics, no tracking, no ads, no data sales.
 
 ### Permissions used by the extension
 
-- **`storage`** — to save data locally in the browser
-- **`host_permissions: https://claude.ai/*`** — to read your account data only on `claude.ai`. The extension has no access to any other site.
+- `storage`, to save data locally in the browser.
+- `host_permissions: https://claude.ai/*`, to read your account data only on `claude.ai`. The extension has no access to any other site.
 
 ### Accounts, login, tracking
 
