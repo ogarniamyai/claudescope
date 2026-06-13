@@ -38,6 +38,7 @@ jobs:
         env:
           WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
           WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+          AMO_CHANNEL: ${{ vars.AMO_CHANNEL || 'unlisted' }}
         run: |
           cp -r stage firefox
           jq '. + {browser_specific_settings: {gecko: {id: "claudex@ogarniamy.ai", strict_min_version: "115.0"}}}' \
@@ -46,8 +47,24 @@ jobs:
           npx --yes web-ext@8 sign \
             --source-dir=firefox \
             --artifacts-dir=dist \
-            --channel=unlisted
+            --channel="$AMO_CHANNEL"
           mv dist/*.xpi "dist/claudex-firefox-${{ steps.ver.outputs.version }}.xpi"
+
+      - name: Upload to Chrome Web Store (draft)
+        env:
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          CWS_EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
+        if: env.CWS_EXTENSION_ID != ''
+        run: |
+          npx --yes chrome-webstore-upload-cli@3 upload \
+            --source "dist/claudex-chrome-${{ steps.ver.outputs.version }}.zip" \
+            --extension-id "$CWS_EXTENSION_ID" \
+            --client-id "$CWS_CLIENT_ID" \
+            --client-secret "$CWS_CLIENT_SECRET" \
+            --refresh-token "$CWS_REFRESH_TOKEN"
+          echo "Wgrane do CWS jako draft. Wejdz w dashboard i kliknij Submit for review."
 
       - name: Upload web artifacts
         uses: actions/upload-artifact@v5
