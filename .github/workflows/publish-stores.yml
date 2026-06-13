@@ -1,0 +1,76 @@
+name: publish-stores
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Wersja do opublikowania (np. 1.1.2). Musi istniec tag vX.Y.Z.'
+        required: true
+        type: string
+      target:
+        description: 'Gdzie publikowac'
+        required: true
+        type: choice
+        options:
+          - both
+          - chrome
+          - firefox
+        default: both
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tag
+        uses: actions/checkout@v5
+        with:
+          ref: v${{ inputs.version }}
+
+      - name: Sync manifest version
+        run: |
+          jq --arg v "${{ inputs.version }}" '.version = $v' manifest.json > manifest.tmp
+          mv manifest.tmp manifest.json
+
+      - name: Stage payload
+        run: |
+          mkdir -p stage
+          cp -r assets config src manifest.json stage/
+
+      - name: Publish Chrome to CWS as draft
+        if: inputs.target == 'chrome' || inputs.target == 'both'
+        env:
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          CWS_EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
+        run: |
+          mkdir -p dist
+          cp -r stage chrome
+          (cd chrome && zip -qr "../dist/claudex-chrome-${{ inputs.version }}.zip" .)
+          npx --yes chrome-webstore-upload-cli@3 upload \
+            --source "dist/claudex-chrome-${{ inputs.version }}.zip" \
+            --extension-id "$CWS_EXTENSION_ID" \
+            --client-id "$CWS_CLIENT_ID" \
+            --client-secret "$CWS_CLIENT_SECRET" \
+            --refresh-token "$CWS_REFRESH_TOKEN"
+          echo "Wgrane do CWS jako draft. Wejdz w dashboard i kliknij Submit for review."
+
+      - name: Publish Firefox to AMO listed
+        if: inputs.target == 'firefox' || inputs.target == 'both'
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: |
+          mkdir -p dist
+          cp -r stage firefox
+          jq '. + {browser_specific_settings: {gecko: {id: "claudex@ogarniamy.ai", strict_min_version: "115.0"}}}' \
+            firefox/manifest.json > firefox/manifest.tmp
+          mv firefox/manifest.tmp firefox/manifest.json
+          npx --yes web-ext@8 sign \
+            --source-dir=firefox \
+            --artifacts-dir=dist \
+            --channel=listed
+          echo "Wyslane do AMO na review."
