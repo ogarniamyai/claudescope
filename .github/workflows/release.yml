@@ -12,7 +12,7 @@ jobs:
   build-web:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Resolve version from tag
         id: ver
@@ -50,7 +50,7 @@ jobs:
           mv dist/*.xpi "dist/claudex-firefox-${{ steps.ver.outputs.version }}.xpi"
 
       - name: Upload web artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: web
           path: |
@@ -61,7 +61,7 @@ jobs:
   build-safari:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Resolve version from tag
         id: ver
@@ -136,7 +136,7 @@ jobs:
           (cd "$STAGE_DIR" && zip -qry "$GITHUB_WORKSPACE/dist/claudex-safari-${{ steps.ver.outputs.version }}.zip" ClaudeX.app)
 
       - name: Upload Safari artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: safari
           path: dist/claudex-safari-${{ steps.ver.outputs.version }}.zip
@@ -147,7 +147,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           path: dist
           merge-multiple: true
