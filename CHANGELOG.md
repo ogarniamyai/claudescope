@@ -2,6 +2,17 @@
 
 Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowanie wg [SemVer](https://semver.org/).
 
+## [1.1.3] - 2026-06-13
+
+### Dodane
+- Workflow `publish-stores.yml`, ręczny przycisk w GitHub Actions do publikowania do Chrome Web Store i Mozilla AMO. Wybierasz wersję i sklep, klikasz Run.
+- `LICENSE` (proprietary, All Rights Reserved) i `PRIVACY.md`.
+- `store-assets/` z zrzutami 1280x800 dla CWS.
+
+### Zmienione
+- Wersja podbita do 1.1.3, żeby zwolnić numer dla pierwszej listed publikacji na AMO (wersje 1.1.0 do 1.1.2 są tam już zarejestrowane jako unlisted, więc tej samej wersji nie da się zgłosić ponownie).
+- README i PRIVACY: usunięte em-dashe i en-dashe, ton bardziej naturalny, dodana sekcja o licencji.
+
 ## [1.1.2] - 2026-06-13
 
 ### Usunięte
@@ -35,6 +46,7 @@ Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowan
 - Panel szczegółowy: rozkład promptów według modelu, limity sesji, szczegóły subskrypcji, mapa godzin szczytu, historia aktywności.
 - Build i automatyczna publikacja paczek `claudex-chrome-*.zip` oraz podpisanego `claudex-firefox-*.xpi` z GitHub Actions po push'u taga `v*`.
 
+[1.1.3]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.3
 [1.1.2]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.2
 [1.1.1]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.1
 [1.1.0]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.0
