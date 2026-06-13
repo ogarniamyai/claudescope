@@ -104,8 +104,23 @@ jobs:
             -derivedDataPath build/derived \
             CODE_SIGN_IDENTITY="-" \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO \
             build
+
+      - name: Ad-hoc sign Safari app
+        run: |
+          APP="$(find build/derived/Build/Products/Release -maxdepth 2 -name 'ClaudeX.app' -print -quit)"
+          if [ -z "$APP" ]; then
+            echo "ClaudeX.app not found before codesign" >&2
+            exit 1
+          fi
+          # Sign extension bundles first, then the containing app.
+          while IFS= read -r appex; do
+            echo "Signing $appex"
+            codesign --force --sign - --timestamp=none "$appex"
+          done < <(find "$APP/Contents/PlugIns" -maxdepth 1 -name '*.appex' 2>/dev/null)
+          echo "Signing $APP"
+          codesign --force --sign - --timestamp=none "$APP"
+          codesign --verify --verbose=2 "$APP"
 
       - name: Package Safari app
         run: |

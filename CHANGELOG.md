@@ -2,6 +2,12 @@
 
 Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowanie wg [SemVer](https://semver.org/).
 
+## [1.1.1] – 2026-06-13
+
+### Naprawione
+- Safari: aplikacja `ClaudeX.app` w paczce 1.1.0 była zupełnie niepodpisana, przez co macOS pokazywał „ClaudeX jest uszkodzona i nie można jej otworzyć". W workflow włączony został podpis ad-hoc (`codesign --sign -`) – Gatekeeper pokazuje teraz standardowe ostrzeżenie „nieznany deweloper", które obchodzi się prawym-klikiem → Otwórz, zamiast blokować start aplikacji.
+- README: instrukcja dla Safari uzupełniona o komendę `xattr -dr com.apple.quarantine` jako fallback dla użytkowników, którzy zostali z paczką 1.1.0 lub trafią na flagę kwarantanny.
+
 ## [1.1.0] – 2026-06-13
 
 ### Dodane
@@ -20,5 +26,6 @@ Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowan
 - Panel szczegółowy: rozkład promptów według modelu, limity sesji, szczegóły subskrypcji, mapa godzin szczytu, historia aktywności.
 - Build i automatyczna publikacja paczek `claudex-chrome-*.zip` oraz podpisanego `claudex-firefox-*.xpi` z GitHub Actions po push'u taga `v*`.
 
+[1.1.1]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.1
 [1.1.0]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.0
 [1.0.0]: https://github.com/ogarniamyai/claudex/releases/tag/v1.0.0

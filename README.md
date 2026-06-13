@@ -34,6 +34,14 @@ Paczka dla Safari nie jest podpisana certyfikatem Apple Developer, więc instala
 1. Pobierz `claudex-safari-*.zip` i rozpakuj go (Finder zrobi to dwukliknięciem).
 2. Przeciągnij **ClaudeX.app** do folderu **Programy** (Applications).
 3. Uruchom **ClaudeX.app** po raz pierwszy: kliknij prawym przyciskiem → **Otwórz** → **Otwórz** w oknie ostrzeżenia Gatekeepera. Jeśli macOS w ogóle nie pozwala otworzyć aplikacji, wejdź w **Ustawienia systemowe → Prywatność i ochrona** i kliknij **Otwórz mimo to** przy wpisie ClaudeX.
+
+   Jeśli zamiast tego widzisz komunikat **„ClaudeX jest uszkodzona i nie można jej otworzyć"** – to flaga kwarantanny nadana przez przeglądarkę przy pobraniu, nie realne uszkodzenie. Otwórz Terminal i uruchom:
+
+   ```sh
+   xattr -dr com.apple.quarantine /Applications/ClaudeX.app
+   ```
+
+   Potem otwórz aplikację ponownie.
 4. Włącz tryb deweloperski w Safari (jednorazowo): **Safari → Ustawienia → Zaawansowane** → zaznacz **„Pokaż funkcje dla programistów witryn"**.
 5. W menu **Programuj** (Develop) zaznacz **„Zezwalaj na niepodpisane rozszerzenia"** (Allow Unsigned Extensions). **Uwaga:** Safari resetuje to ustawienie po każdym zamknięciu aplikacji – po restarcie Safari trzeba je włączyć ponownie.
 6. Wejdź w **Safari → Ustawienia → Rozszerzenia**, znajdź **ClaudeX** na liście i włącz je. Przy pierwszym uruchomieniu Safari poprosi o zgodę na dostęp do `claude.ai` – zatwierdź.
