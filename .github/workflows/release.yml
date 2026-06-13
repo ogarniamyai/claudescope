@@ -34,20 +34,13 @@ jobs:
           cp -r stage chrome
           (cd chrome && zip -qr "../dist/claudex-chrome-${{ steps.ver.outputs.version }}.zip" .)
 
-      - name: Build Firefox signed XPI
-        env:
-          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
-          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+      - name: Build Firefox unsigned source XPI
         run: |
           cp -r stage firefox
           jq '. + {browser_specific_settings: {gecko: {id: "claudex@ogarniamy.ai", strict_min_version: "115.0"}}}' \
             firefox/manifest.json > firefox/manifest.tmp
           mv firefox/manifest.tmp firefox/manifest.json
-          npx --yes web-ext@8 sign \
-            --source-dir=firefox \
-            --artifacts-dir=dist \
-            --channel=unlisted
-          mv dist/*.xpi "dist/claudex-firefox-${{ steps.ver.outputs.version }}.xpi"
+          (cd firefox && zip -qr "../dist/claudex-firefox-${{ steps.ver.outputs.version }}-source.xpi" .)
 
       - name: Upload web artifacts
         uses: actions/upload-artifact@v5
@@ -55,7 +48,7 @@ jobs:
           name: web
           path: |
             dist/claudex-chrome-${{ steps.ver.outputs.version }}.zip
-            dist/claudex-firefox-${{ steps.ver.outputs.version }}.xpi
+            dist/claudex-firefox-${{ steps.ver.outputs.version }}-source.xpi
           if-no-files-found: error
 
   publish:

@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ClaudeX",
   "description": "Lekki licznik limitow, czasu aktywnosci i platnosci dla claude.ai od ogarniamy.ai. Dane zostaja na Twoim urzadzeniu.",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "icons": {
     "16": "assets/mark-16.png",
     "32": "assets/mark-32.png",

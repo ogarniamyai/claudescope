@@ -2,6 +2,11 @@
 
 Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowanie wg [SemVer](https://semver.org/).
 
+## [1.1.4] - 2026-06-13
+
+### Naprawione
+- `release.yml` przestaje automatycznie podpisywać Firefox XPI jako unlisted. Auto-sign przy każdym tagu spalał kolejne numery wersji na AMO, blokując pierwsze listed submission (1.1.0 do 1.1.3 były tam zarezerwowane jako unlisted). Workflow teraz buduje tylko niepodpisany `claudex-firefox-X.Y.Z-source.xpi` jako artefakt. Podpisywanie i wgrywanie do AMO odbywa się przez `publish-stores.yml` (channel listed) lub ręcznie przez AMO Developer Hub.
+
 ## [1.1.3] - 2026-06-13
 
 ### Dodane
@@ -46,6 +51,7 @@ Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowan
 - Panel szczegółowy: rozkład promptów według modelu, limity sesji, szczegóły subskrypcji, mapa godzin szczytu, historia aktywności.
 - Build i automatyczna publikacja paczek `claudex-chrome-*.zip` oraz podpisanego `claudex-firefox-*.xpi` z GitHub Actions po push'u taga `v*`.
 
+[1.1.4]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.4
 [1.1.3]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.3
 [1.1.2]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.2
 [1.1.1]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.1
