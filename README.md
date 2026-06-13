@@ -121,3 +121,20 @@ Sygnalizowane są również inne ważne komunikaty:
 ## Prywatność
 
 Wtyczka ma dostęp **wyłącznie do claude.ai** – do żadnej innej strony. Wszystkie obliczenia wykonują się lokalnie w Twojej przeglądarce, a dane nie są wysyłane na żaden zewnętrzny serwer. Bez kont, bez logowania, bez śledzenia.
+
+Pełna polityka prywatności: [PRIVACY.md](PRIVACY.md).
+
+## Licencja i znaki towarowe
+
+Kod jest **publicznie widoczny wyłącznie dla transparencji** – żeby każdy mógł sprawdzić, że wtyczka nie wysyła nigdzie żadnych danych. To **nie jest open source**.
+
+Możesz:
+- zainstalować i używać oficjalnej wersji wtyczki ze sklepu Chrome / Mozilla,
+- czytać i sprawdzać kod źródłowy dla własnej oceny bezpieczeństwa.
+
+Bez zgody ogarniamy.ai **nie wolno**:
+- kopiować, modyfikować, tłumaczyć ani tworzyć prac pochodnych kodu,
+- publikować forka, klona ani przepakowanej wersji wtyczki w sklepie lub gdziekolwiek indziej,
+- używać nazwy „ClaudeX", „ogarniamy.ai" ani znaku marki w innych produktach.
+
+Pełny tekst: [LICENSE](LICENSE). Pull requesty nie są przyjmowane – błędy i sugestie zgłaszaj przez [issues na GitHubie](https://github.com/ogarniamyai/claudex/issues).

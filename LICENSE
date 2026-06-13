@@ -1,0 +1,75 @@
+ClaudeX – Proprietary License
+Copyright (c) 2025-2026 ogarniamy.ai. All rights reserved.
+
+The source code in this repository is made publicly visible solely for
+transparency, security review, and to allow users to verify that the
+ClaudeX browser extension does not collect or transmit personal data.
+Public visibility does NOT grant any additional rights beyond those
+explicitly stated in this license.
+
+1. PERMITTED USE
+
+   You may:
+   (a) install and use the official binary distribution of the ClaudeX
+       extension obtained from the Chrome Web Store, Mozilla Add-ons,
+       or another distribution channel officially operated by
+       ogarniamy.ai;
+   (b) read and inspect the source code in this repository for the
+       purpose of security review, academic study, or curiosity.
+
+2. PROHIBITED USE
+
+   Without prior written permission from ogarniamy.ai, you may NOT:
+   (a) copy, reproduce, modify, adapt, translate, or create derivative
+       works based on the source code or compiled artifacts;
+   (b) redistribute, sublicense, publish, sell, rent, lease, lend, or
+       otherwise transfer the source code or compiled artifacts,
+       whether modified or unmodified, by any means;
+   (c) publish a fork, clone, or repackaged version of the extension
+       to any extension store, package registry, website, or other
+       distribution channel;
+   (d) reverse engineer, decompile, or disassemble the compiled
+       artifacts beyond what is strictly permitted by applicable law;
+   (e) remove, alter, or obscure copyright notices, license notices,
+       or attribution contained in this repository or the extension.
+
+3. TRADEMARKS
+
+   "ClaudeX", "ogarniamy.ai", the ogarniamy.ai hexagon mark, and the
+   visual identity of the extension are trademarks of ogarniamy.ai.
+   No license to use these trademarks is granted by this license.
+   You may not use them in any form, including in derivative works,
+   product names, store listings, marketing materials, or domain names,
+   without prior written permission.
+
+4. NO CONTRIBUTIONS
+
+   ogarniamy.ai does not accept pull requests or external contributions
+   to this repository. Bug reports and feature requests may be filed
+   as GitHub issues, but no code contributions will be merged.
+   Any code submitted, knowingly or unknowingly, is rejected and confers
+   no rights on the submitter.
+
+5. NO WARRANTY
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+   NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE
+   FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+   CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION
+   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+6. TERMINATION
+
+   This license terminates automatically and without notice upon any
+   breach of its terms. Upon termination you must cease all use of the
+   software and destroy all copies in your possession or control.
+
+7. GOVERNING LAW
+
+   This license is governed by the laws of the Republic of Poland.
+   Any dispute arising from this license shall be resolved by the
+   competent courts of Poland.
+
+Contact: open an issue at https://github.com/ogarniamyai/claudex/issues
