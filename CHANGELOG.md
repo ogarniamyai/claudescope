@@ -2,6 +2,11 @@
 
 Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowanie wg [SemVer](https://semver.org/).
 
+## [1.2.3] - 2026-06-15
+
+### Zmienione
+- Firefox `strict_min_version` podniesiony z `140.0` na `142.0`. Firefox for Android dostał `data_collection_permissions` dopiero w 142 (desktop w 140), więc walidator AMO dalej zgłaszał ostrzeżenie pod kątem Androida. Bump do 142 zamyka temat dla obu platform jednym numerem.
+
 ## [1.2.2] - 2026-06-15
 
 ### Zmienione
@@ -77,6 +82,7 @@ Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowan
 - Panel szczegółowy: rozkład promptów według modelu, limity sesji, szczegóły subskrypcji, mapa godzin szczytu, historia aktywności.
 - Build i automatyczna publikacja paczek `claudex-chrome-*.zip` oraz podpisanego `claudex-firefox-*.xpi` z GitHub Actions po push'u taga `v*`.
 
+[1.2.3]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.3
 [1.2.2]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.2
 [1.2.1]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.1
 [1.2.0]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.0
