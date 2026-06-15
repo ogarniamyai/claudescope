@@ -37,7 +37,7 @@ jobs:
       - name: Build Firefox unsigned source XPI
         run: |
           cp -r stage firefox
-          jq '. + {browser_specific_settings: {gecko: {id: "claudescope@ogarniamy.ai", strict_min_version: "115.0", data_collection_permissions: {required: ["none"]}}}}' \
+          jq '. + {browser_specific_settings: {gecko: {id: "claudescope@ogarniamy.ai", strict_min_version: "140.0", data_collection_permissions: {required: ["none"]}}}}' \
             firefox/manifest.json > firefox/manifest.tmp
           mv firefox/manifest.tmp firefox/manifest.json
           (cd firefox && zip -qr "../dist/claudescope-firefox-${{ steps.ver.outputs.version }}-source.xpi" .)

@@ -2,6 +2,11 @@
 
 Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowanie wg [SemVer](https://semver.org/).
 
+## [1.2.2] - 2026-06-15
+
+### Zmienione
+- Firefox `strict_min_version` podniesiony z `115.0` na `140.0`. Powód: `data_collection_permissions` (dodane w 1.2.1) Firefox zna dopiero od wersji 140, więc na 115-139 to pole było ignorowane i walidator AMO zgłaszał 2 ostrzeżenia kosmetyczne. Tracimy teoretycznie userów ESR 115 i 128, ale dla wtyczki do `claude.ai` to praktycznie nieistotna baza.
+
 ## [1.2.1] - 2026-06-15
 
 ### Naprawione
@@ -72,6 +77,7 @@ Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowan
 - Panel szczegółowy: rozkład promptów według modelu, limity sesji, szczegóły subskrypcji, mapa godzin szczytu, historia aktywności.
 - Build i automatyczna publikacja paczek `claudex-chrome-*.zip` oraz podpisanego `claudex-firefox-*.xpi` z GitHub Actions po push'u taga `v*`.
 
+[1.2.2]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.2
 [1.2.1]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.1
 [1.2.0]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.0
 [1.1.4]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.1.4
