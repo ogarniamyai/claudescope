@@ -2,6 +2,11 @@
 
 Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowanie wg [SemVer](https://semver.org/).
 
+## [1.2.1] - 2026-06-15
+
+### Naprawione
+- AMO validator odrzucał paczkę `claudescope-firefox-1.2.0-source.xpi` z błędem „The `data_collection_permissions` property is missing". Mozilla od kilku tygodni wymaga zadeklarowania, jakie dane wtyczka zbiera i transmituje (Firefox built-in data consent). Workflow `release.yml` i `publish-stores.yml` dorzucają teraz przy budowie Firefox XPI: `browser_specific_settings.gecko.data_collection_permissions = { required: ["none"] }`. ClaudeScope nic nie wysyła na zewnątrz, więc „none" to prawda. Dotyczy tylko Firefox — Chrome ignoruje to pole, więc paczka CWS bez zmian.
+
 ## [1.2.0] - 2026-06-15
 
 ### Zmienione
@@ -67,6 +72,7 @@ Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowan
 - Panel szczegółowy: rozkład promptów według modelu, limity sesji, szczegóły subskrypcji, mapa godzin szczytu, historia aktywności.
 - Build i automatyczna publikacja paczek `claudex-chrome-*.zip` oraz podpisanego `claudex-firefox-*.xpi` z GitHub Actions po push'u taga `v*`.
 
+[1.2.1]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.1
 [1.2.0]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.0
 [1.1.4]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.1.4
 [1.1.3]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.1.3
