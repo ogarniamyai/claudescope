@@ -2,7 +2,7 @@
   const OG = root.OG;
 
   OG.wire = {
-    channel: "claudex::bus",
+    channel: "claudescope::bus",
     kind: {
       model: "model-seen"
     },

@@ -1,140 +1,58 @@
-# ClaudeX
+# ClaudeScope
 
-ClaudeX to wtyczka do przeglądarki, która pokazuje na bieżąco wszystko, co warto wiedzieć o swoim koncie claude.ai: wykorzystanie limitów, czas pracy, datę odnowienia subskrypcji, godziny szczytu. Wszystko liczy się lokalnie w Twojej przeglądarce, żadne dane nigdzie nie wychodzą.
+Rozszerzenie przeglądarki dla `claude.ai`. Czyta z API konta (te same endpointy, których używa sama strona) i renderuje w panelu bocznym: limity 5h / 7d, cykl rozliczeniowy, godziny szczytu, czas aktywności, rozkład promptów per model. Wszystko liczy się lokalnie, nic nie wychodzi z przeglądarki.
 
-Stworzone przez [ogarniamy.ai](https://ogarniamy.ai).
+Tworzone przez [ogarniamy.ai](https://ogarniamy.ai).
 
 ## Instalacja
 
-Pobierz paczkę dla swojej przeglądarki z [najnowszej wersji](https://github.com/ogarniamyai/claudex/releases/latest).
+Paczki gotowe do instalacji znajdziesz w [najnowszym release'ie](https://github.com/ogarniamyai/claudescope/releases/latest).
 
-### Chrome, Edge, Brave, Opera, Vivaldi, Arc
+**Chrome / Edge / Brave / Opera / Vivaldi / Arc**
+1. Pobierz `claudescope-chrome-*.zip` i rozpakuj. Folder musi pozostać na dysku — przeglądarka ładuje wtyczkę bezpośrednio z niego.
+2. `chrome://extensions` → włącz tryb dewelopera → „Załaduj rozpakowane" → wskaż folder.
 
-1. Pobierz `claudex-chrome-*.zip` i rozpakuj do dowolnego folderu (folder musi pozostać na dysku, bo przeglądarka ładuje wtyczkę bezpośrednio z niego).
-2. Otwórz stronę zarządzania rozszerzeniami:
-   - **Chrome**: wpisz `chrome://extensions` w pasku adresu
-   - **Edge**: wpisz `edge://extensions`
-   - **Brave**: wpisz `brave://extensions`
-   - **Opera**: wpisz `opera://extensions`
-3. W prawym górnym rogu włącz **„Tryb dewelopera"**.
-4. Kliknij **„Załaduj rozpakowane"** i wskaż folder z rozpakowaną wtyczką.
-5. Gotowe. Otwórz claude.ai, a panel pojawi się przy prawej krawędzi okna.
+**Firefox**
+1. Pobierz `claudescope-firefox-*.xpi`.
+2. Otwórz plik w Firefoksie (drag&drop na okno albo `Plik → Otwórz plik`).
 
-### Firefox
+Aktualizacja: nowy `.xpi` w Firefoksie sam się podmieni. W Chromium podmień zawartość folderu i kliknij refresh w `chrome://extensions`.
 
-1. Pobierz `claudex-firefox-*.xpi`.
-2. Otwórz plik w Firefoksie (przeciągnij na okno przeglądarki lub użyj **Plik → Otwórz plik**).
-3. Potwierdź instalację w oknie dialogowym.
-4. Gotowe. Otwórz claude.ai, a panel pojawi się przy prawej krawędzi okna.
+## Development
 
-**Aktualizacja**: aby zaktualizować wtyczkę, pobierz nowy plik `.xpi` i otwórz go w Firefoksie. Instalacja zostanie zaktualizowana automatycznie. W przeglądarkach Chromium wystarczy zastąpić pliki w folderze, z którego ładowana jest wtyczka, i kliknąć przycisk odświeżenia w `chrome://extensions`.
+To jest waniliowy MV3 content script bez bundlera ani transpilacji. Edytujesz pliki, klikasz refresh w `chrome://extensions`, zmiany są widoczne.
 
-## Funkcjonalności
+```
+# załaduj jako unpacked:
+chrome://extensions → tryb dewelopera → "Załaduj rozpakowane" → wskaż katalog repo
+```
 
-### Panel boczny
+`manifest.json` deklaruje listę skryptów ładowanych po kolei jako jeden content script na `https://claude.ai/*`. Kolejność ma znaczenie — `core/ns.js` musi pojechać pierwszy, `boot.js` ostatni. Build do paczek `.zip` / `.xpi` robi `.github/workflows/release.yml` przy push'u taga `v*` — lokalnie nic nie kompilujesz.
 
-Po załadowaniu wtyczki na claude.ai przy prawej krawędzi okna pojawia się kompaktowy panel boczny. Jest zawsze widoczny i przedstawia najważniejsze informacje o Twoim koncie:
+Wersję trzymaj zsynchronizowaną między `manifest.json` a tagiem git. Workflow `publish-stores.yml` przeflashowuje wersję z taga do manifestu przed buildem, ale na lokalnym disku zostawia stary numer.
 
-<p align="center"><img src="readme-assets/extension-mini-panel.png" alt="Panel boczny ClaudeX" width="520" /></p>
+## Architektura
 
-Od góry znajdują się:
+```
+src/
+├── core/      podstawa: namespace OG, semver, zegar, etykiety, magazyn (storage)
+├── feed/      pobieranie danych z claude.ai (usage, billing, peak window)
+├── capture/   przechwytywanie modelu z requestów /completion (injected script + relay)
+├── pulse/     liczniki: obecność (presence), ledger zdarzeń, dziennik użycia, rollup statystyk
+├── surface/   warstwa UI: shadow DOM host, mini panel (rail), drawer, kafelki, skin
+└── boot.js    spina to wszystko po DOMContentLoaded
+```
 
-- **Limit 5-godzinny**: pasek postępu z procentem wykorzystania oraz czasem do resetu.
-- **Limit tygodniowy (7-dniowy)**: pasek postępu z procentem wykorzystania oraz czasem do resetu.
-- **Cykl rozliczeniowy subskrypcji**: wskaźnik pokazujący odsetek wykorzystanych dni i liczbę dni pozostałych do odnowienia (kilka dni przed końcem cyklu wyświetla się ostrzeżenie).
-- **Czas aktywności**: licznik czasu spędzonego w claude.ai. Liczy tylko wtedy, gdy karta jest aktywna i okno przeglądarki jest w użyciu.
-- **Wskaźnik godzin szczytu**: informuje, czy aktualna pora to godziny szczytu (peak hours), w których prompty zużywają więcej z limitu.
-- **Przycisk z ikoną wykresu**: otwiera panel ze szczegółowymi danymi.
+Globalny namespace `OG` (definiowany w `core/ns.js`) służy za szynę komunikacji między modułami — każdy plik dopisuje swoje API do `OG.*`, `boot.js` orkiestruje cykl render. Konfiguracja runtime (URL-e API, interwał pollu, peak windows, progi alertów) siedzi w `config/runtime.config.json` i jest ściągana z jsDelivr przy starcie (z fallbackiem do wersji wbudowanej w paczkę), żeby dało się tuningować zachowanie bez wypychania nowej wersji do sklepów.
 
-Na lewej krawędzi panelu znajduje się **mała strzałka**, która zwija panel boczny do wąskiego paska. Przydaje się, gdy chcesz odsłonić więcej miejsca w interfejsie claude.ai, ale jednocześnie chcesz, aby wtyczka pozostała aktywna.
+Capture modelu robi się w sandboxie strony — `capture/model-reader.injected.js` jest wstrzykiwany jako `<script>` i podpina się pod `window.fetch` + `XMLHttpRequest.prototype.send`, żeby wyciągać nazwę modelu z body POST-a do `/completion`. Komunikuje się z resztą wtyczki przez `window.postMessage` (kanał `claudescope`).
 
-### Panel szczegółowy, prompty według modelu
-
-Po kliknięciu przycisku z ikoną wykresu otwiera się panel szczegółowy. Sekcja **„PROMPTY"** prezentuje rozkład Twoich zapytań pomiędzy modele Claude:
-
-<p align="center"><img src="readme-assets/extension-prompts-per-model.png" alt="Prompty według modelu" width="320" /></p>
-
-- Procentowy udział każdego modelu w wysłanych zapytaniach.
-- Łączna liczba wysłanych promptów.
-- Szybki podgląd preferowanych modeli.
-
-### Limity sesji
-
-Sekcja **„LIMITY"** zawiera szczegółowe informacje o wykorzystaniu limitów:
-
-<p align="center"><img src="readme-assets/extension-session-limits.png" alt="Limity sesji" width="520" /></p>
-
-- Procent wykorzystania limitu 5-godzinnego.
-- Procent wykorzystania limitu 7-dniowego.
-- Data i godzina najbliższego resetu każdego z limitów.
-- Wyliczony czas pozostały do resetu.
-
-### Szczegóły subskrypcji
-
-Sekcja **„SUBSKRYPCJA"** informuje o aktualnym stanie Twojego planu:
-
-<p align="center"><img src="readme-assets/extension-subscription-details.png" alt="Szczegóły subskrypcji" width="520" /></p>
-
-- Nazwa i typ planu.
-- Data odnowienia subskrypcji.
-- Liczba dni pozostałych do końca cyklu.
-- Status płatności oraz tryb rozliczeniowy.
-
-### Mapa godzin szczytu
-
-Sekcja **„PEAK HOURS"** przedstawia graficzny rozkład godzin szczytu w skali doby:
-
-<p align="center"><img src="readme-assets/extension-peak-hours.png" alt="Peak Hours" width="520" /></p>
-
-- Oś czasu obejmująca pełne 24 godziny.
-- Żółte strefy oznaczają godziny szczytu.
-- Anthropic potwierdziło, że w godzinach szczytu prompty zużywają więcej z limitu. Jeśli zależy Ci na oszczędzaniu, planuj intensywniejszą pracę poza tymi godzinami.
-
-### Aktywność i wykorzystanie
-
-Sekcja **„AKTYWNOŚĆ"** prezentuje historię Twojej pracy w claude.ai:
-
-<p align="center"><img src="readme-assets/extension-usage.png" alt="Aktywność" width="520" /></p>
-
-- Lewa oś: łączny czas spędzony w claude.ai w wybranym okresie.
-- Kropki na wykresie: procent wykorzystania sesji w poszczególnych momentach.
-- Najechanie kursorem na kropkę pokazuje dokładną wartość.
-- Zakres można przełączać między widokiem dziennym, tygodniowym i miesięcznym.
-
-### Komunikaty i alerty
-
-Wtyczka odświeża dane z claude.ai automatycznie (domyślnie co 15 sekund). Jeżeli pojawi się problem z pobraniem danych, zostaniesz o tym poinformowany:
-
-<p align="center"><img src="readme-assets/extension-error-message.png" alt="Komunikat błędu" width="520" /></p>
-
-- Komunikat o błędzie pojawia się bezpośrednio na panelu bocznym.
-- Ostatnia znana wartość pozostaje widoczna, dopóki nie uda się pobrać świeżych danych.
-- Wtyczka samodzielnie ponawia próby połączenia w tle.
-- Brakujące wartości są oznaczone myślnikiem, żeby nie wprowadzać w błąd zerami.
-
-Sygnalizowane są również inne ważne komunikaty:
-
-- **Komunikaty od autora wtyczki**: np. informacje o nowych wersjach lub istotne ostrzeżenia. Kolor ramki zależy od wagi: niebieska dla informacji, żółta dla ostrzeżeń.
-- **Błędy połączenia z claude.ai**: gdy nie udaje się pobrać aktualnych danych, ramka komunikatu jest czerwona (zarówno na panelu bocznym, jak i w panelu szczegółowym).
-- **Pulsujący przycisk menu** na panelu bocznym sygnalizuje, że pojawiła się informacja warta sprawdzenia.
+UI żyje w shadow DOM zamontowanym do `<html>` — żadne style claude.ai nie wyciekają w żadną stronę. Skin trzymany jako stringified CSS w `surface/skin.js`.
 
 ## Prywatność
 
-Wtyczka ma dostęp **wyłącznie do claude.ai**, do żadnej innej strony. Wszystkie obliczenia wykonują się lokalnie w Twojej przeglądarce, a dane nie są wysyłane na żaden zewnętrzny serwer. Bez kont, bez logowania, bez śledzenia.
+Wtyczka ma dostęp wyłącznie do `claude.ai`. Nie ma backendu, nie wysyła nic na zewnątrz, dane lecą do `chrome.storage.local`. Pełny tekst: [PRIVACY.md](PRIVACY.md).
 
-Pełna polityka prywatności: [PRIVACY.md](PRIVACY.md).
+## Licencja
 
-## Licencja i znaki towarowe
-
-Kod jest **publicznie widoczny wyłącznie dla transparencji**, żeby każdy mógł sprawdzić, że wtyczka nie wysyła nigdzie żadnych danych. To **nie jest open source**.
-
-Możesz:
-- zainstalować i używać oficjalnej wersji wtyczki ze sklepu Chrome lub Mozilla,
-- czytać i sprawdzać kod źródłowy dla własnej oceny bezpieczeństwa.
-
-Bez zgody ogarniamy.ai **nie wolno**:
-- kopiować, modyfikować, tłumaczyć ani tworzyć prac pochodnych kodu,
-- publikować forka, klona ani przepakowanej wersji wtyczki w sklepie lub gdziekolwiek indziej,
-- używać nazwy „ClaudeX", „ogarniamy.ai" ani znaku marki w innych produktach.
-
-Pełny tekst: [LICENSE](LICENSE). Pull requesty nie są przyjmowane. Błędy i sugestie zgłaszaj przez [issues na GitHubie](https://github.com/ogarniamyai/claudex/issues).
+Proprietary, All Rights Reserved. Kod jest publiczny dla transparencji bezpieczeństwa — nie jest open source. Pull requesty nie są przyjmowane. Pełny tekst: [LICENSE](LICENSE). Bugi i sugestie: [issues](https://github.com/ogarniamyai/claudescope/issues).

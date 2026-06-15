@@ -7,7 +7,7 @@
     "text": null
   },
   "selfUpdate": {
-    "configUrl": "https://cdn.jsdelivr.net/gh/ogarniamyai/claudex@main/config/runtime.config.json"
+    "configUrl": "https://cdn.jsdelivr.net/gh/ogarniamyai/claudescope@main/config/runtime.config.json"
   },
   "poll": {
     "usageSeconds": 15

@@ -15,23 +15,11 @@
       '<defs><clipPath id="' + id + '"><polygon points="' + HEX + '"/></clipPath></defs>' +
       '<polygon points="' + HEX + '" fill="#2563eb"/>' +
       '<g clip-path="url(#' + id + ')">' +
-      '<g fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="8.75" stroke-width="16.67">' +
-      '<line x1="157.94" y1="166.72" x2="157.94" y2="52.65"/>' +
-      '<line x1="157.94" y1="166.72" x2="237.71" y2="120.65"/>' +
-      '<line x1="157.94" y1="166.72" x2="256.75" y2="223.75"/>' +
-      '<line x1="157.94" y1="166.72" x2="157.94" y2="250.08"/>' +
-      '<line x1="157.94" y1="166.72" x2="59.14" y2="223.75"/>' +
-      '<line x1="157.94" y1="166.72" x2="78.18" y2="120.65"/>' +
-      "</g>" +
-      '<g fill="#fff">' +
-      '<circle cx="157.94" cy="52.65" r="22.81"/>' +
-      '<circle cx="237.71" cy="120.65" r="18.43"/>' +
-      '<circle cx="256.75" cy="223.75" r="22.81"/>' +
-      '<circle cx="157.94" cy="250.08" r="18.43"/>' +
-      '<circle cx="59.14" cy="223.75" r="22.81"/>' +
-      '<circle cx="78.18" cy="120.65" r="18.43"/>' +
-      '<circle cx="157.94" cy="166.72" r="36.85"/>' +
-      "</g></g></svg>"
+      '<circle cx="157.94" cy="166.72" r="86" fill="none" stroke="#fff" stroke-opacity="0.28" stroke-width="20" stroke-linecap="round" stroke-dasharray="405 540" transform="rotate(135 157.94 166.72)"/>' +
+      '<circle cx="157.94" cy="166.72" r="86" fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round" stroke-dasharray="284 540" transform="rotate(135 157.94 166.72)"/>' +
+      '<circle cx="157.94" cy="166.72" r="34" fill="#fff"/>' +
+      '<line x1="157.94" y1="166.72" x2="157.94" y2="100" stroke="#2563eb" stroke-width="13" stroke-linecap="round"/>' +
+      "</g></svg>"
     );
   }
 
@@ -47,8 +35,7 @@
   function lockup() {
     return (
       '<div class="og-lock">' +
-      '<img class="og-lock-logo" src="' + logoUrl() + '" alt="ogarniamy.ai">' +
-      '<span class="og-lock-tag">' + (OG.product || "ClaudeX") + "</span>" +
+      '<img class="og-lock-logo" src="' + logoUrl() + '" alt="ClaudeScope">' +
       "</div>"
     );
   }

@@ -9,6 +9,7 @@
   }
 
   function create(label, kind, full) {
+    const showDay = kind === "week";
     const wrap = document.createElement("div");
     wrap.className = "og-meter";
 
@@ -56,8 +57,12 @@
         reset.textContent = has
           ? OG.clock.shortDate(resetIso) + " " + OG.clock.shortTime(resetIso) + " (za " + OG.clock.untilLabel(resetIso) + ")"
           : "reset -";
+      } else if (has) {
+        const time = OG.clock.shortTime(resetIso);
+        const day = showDay ? OG.clock.dayName(resetIso) : "";
+        reset.textContent = day ? day + " " + time : time;
       } else {
-        reset.textContent = has ? OG.clock.shortTime(resetIso) : "-";
+        reset.textContent = "-";
       }
     }
 

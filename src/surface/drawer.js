@@ -103,7 +103,7 @@
 
     const foot = document.createElement("div");
     foot.className = "og-foot";
-    foot.innerHTML = "ogarniamy<span>.ai</span> | " + (OG.product || "ClaudeX") + " " + OG.version;
+    foot.innerHTML = "ogarniamy<span>.ai</span> | " + (OG.product || "ClaudeScope") + " " + OG.version;
 
     el.appendChild(head);
     el.appendChild(notices);

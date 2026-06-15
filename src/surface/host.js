@@ -3,7 +3,7 @@
 
   function create() {
     const mount = document.createElement("div");
-    mount.id = "claudex-host";
+    mount.id = "claudescope-host";
     const shadow = mount.attachShadow({ mode: "open" });
 
     const style = document.createElement("style");
@@ -53,7 +53,7 @@
       try {
         fn();
       } catch (err) {
-        if (root.console) console.warn("[ClaudeX] " + label + ":", err && err.message);
+        if (root.console) console.warn("[ClaudeScope] " + label + ":", err && err.message);
       }
     }
 

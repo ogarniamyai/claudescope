@@ -2,7 +2,7 @@
   const self = document.currentScript;
   const match = (self && self.dataset.match) || "/completion";
   const modelPath = (self && self.dataset.modelPath) || "model";
-  const beacon = (self && self.dataset.beacon) || "claudex";
+  const beacon = (self && self.dataset.beacon) || "claudescope";
 
   function dig(node, path) {
     const steps = [];

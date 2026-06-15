@@ -1,4 +1,4 @@
-# Polityka prywatności ClaudeX
+# Polityka prywatności ClaudeScope
 
 _Polish version below. English version follows._
 
@@ -6,11 +6,11 @@ _Polish version below. English version follows._
 
 **Data ostatniej aktualizacji:** 2026-06-13
 
-ClaudeX to rozszerzenie do przeglądarki tworzone przez **ogarniamy.ai**, które pokazuje wykorzystanie limitów konta claude.ai, czas aktywności, datę odnowienia subskrypcji i godziny szczytu.
+ClaudeScope to rozszerzenie do przeglądarki tworzone przez **ogarniamy.ai**, które pokazuje wykorzystanie limitów konta claude.ai, czas aktywności, datę odnowienia subskrypcji i godziny szczytu.
 
 ### Jakie dane są zbierane?
 
-**Żadne nie opuszczają Twojej przeglądarki.** ClaudeX nie wysyła nic na żaden zewnętrzny serwer. Po prostu nie ma serwera ClaudeX.
+**Żadne nie opuszczają Twojej przeglądarki.** ClaudeScope nie wysyła nic na żaden zewnętrzny serwer. Po prostu nie ma serwera ClaudeScope.
 
 Wszystko co rozszerzenie robi:
 
@@ -20,7 +20,7 @@ Wszystko co rozszerzenie robi:
 
 ### Gdzie dane są przechowywane?
 
-Wyłącznie w pamięci lokalnej Twojej przeglądarki na Twoim urządzeniu. Dane nie są synchronizowane między urządzeniami przez ClaudeX. Jeśli odinstalujesz rozszerzenie albo wyczyścisz dane przeglądarki, wszystko znika razem z nimi.
+Wyłącznie w pamięci lokalnej Twojej przeglądarki na Twoim urządzeniu. Dane nie są synchronizowane między urządzeniami przez ClaudeScope. Jeśli odinstalujesz rozszerzenie albo wyczyścisz dane przeglądarki, wszystko znika razem z nimi.
 
 ### Komu dane są udostępniane?
 
@@ -33,11 +33,11 @@ Nikomu. Brak zewnętrznych serwerów, brak analityki, brak śledzenia, brak rekl
 
 ### Konta, logowanie, śledzenie
 
-ClaudeX nie wymaga rejestracji, nie ma kont, nie loguje, nie używa cookie poza tym, czego wymaga `claude.ai`.
+ClaudeScope nie wymaga rejestracji, nie ma kont, nie loguje, nie używa cookie poza tym, czego wymaga `claude.ai`.
 
 ### Kontakt
 
-Pytania o prywatność: napisz issue na https://github.com/ogarniamyai/claudex/issues lub na adres wskazany w sklepie z rozszerzeniami.
+Pytania o prywatność: napisz issue na https://github.com/ogarniamyai/claudescope/issues lub na adres wskazany w sklepie z rozszerzeniami.
 
 ---
 
@@ -45,11 +45,11 @@ Pytania o prywatność: napisz issue na https://github.com/ogarniamyai/claudex/i
 
 **Last updated:** 2026-06-13
 
-ClaudeX is a browser extension built by **ogarniamy.ai** that surfaces your claude.ai account usage, active time, subscription renewal and peak hours.
+ClaudeScope is a browser extension built by **ogarniamy.ai** that surfaces your claude.ai account usage, active time, subscription renewal and peak hours.
 
 ### What data is collected?
 
-**None of it leaves your browser.** ClaudeX has no backend. There is no ClaudeX server.
+**None of it leaves your browser.** ClaudeScope has no backend. There is no ClaudeScope server.
 
 What the extension does:
 
@@ -59,7 +59,7 @@ What the extension does:
 
 ### Where is the data stored?
 
-Only in your browser's local storage on your device. ClaudeX does not sync data across devices. Uninstalling the extension or clearing browser data removes everything.
+Only in your browser's local storage on your device. ClaudeScope does not sync data across devices. Uninstalling the extension or clearing browser data removes everything.
 
 ### Who is the data shared with?
 
@@ -72,8 +72,8 @@ Nobody. No remote servers, no analytics, no tracking, no ads, no data sales.
 
 ### Accounts, login, tracking
 
-ClaudeX requires no registration, has no accounts, performs no logins, and uses no cookies beyond what `claude.ai` itself requires.
+ClaudeScope requires no registration, has no accounts, performs no logins, and uses no cookies beyond what `claude.ai` itself requires.
 
 ### Contact
 
-Privacy questions: open an issue at https://github.com/ogarniamyai/claudex/issues or use the contact email shown on the extension's store page.
+Privacy questions: open an issue at https://github.com/ogarniamyai/claudescope/issues or use the contact email shown on the extension's store page.

@@ -32,23 +32,23 @@ jobs:
         run: |
           mkdir -p dist
           cp -r stage chrome
-          (cd chrome && zip -qr "../dist/claudex-chrome-${{ steps.ver.outputs.version }}.zip" .)
+          (cd chrome && zip -qr "../dist/claudescope-chrome-${{ steps.ver.outputs.version }}.zip" .)
 
       - name: Build Firefox unsigned source XPI
         run: |
           cp -r stage firefox
-          jq '. + {browser_specific_settings: {gecko: {id: "claudex@ogarniamy.ai", strict_min_version: "115.0"}}}' \
+          jq '. + {browser_specific_settings: {gecko: {id: "claudescope@ogarniamy.ai", strict_min_version: "115.0"}}}' \
             firefox/manifest.json > firefox/manifest.tmp
           mv firefox/manifest.tmp firefox/manifest.json
-          (cd firefox && zip -qr "../dist/claudex-firefox-${{ steps.ver.outputs.version }}-source.xpi" .)
+          (cd firefox && zip -qr "../dist/claudescope-firefox-${{ steps.ver.outputs.version }}-source.xpi" .)
 
       - name: Upload web artifacts
         uses: actions/upload-artifact@v5
         with:
           name: web
           path: |
-            dist/claudex-chrome-${{ steps.ver.outputs.version }}.zip
-            dist/claudex-firefox-${{ steps.ver.outputs.version }}-source.xpi
+            dist/claudescope-chrome-${{ steps.ver.outputs.version }}.zip
+            dist/claudescope-firefox-${{ steps.ver.outputs.version }}-source.xpi
           if-no-files-found: error
 
   publish:

@@ -153,6 +153,7 @@
   white-space: nowrap;
   color: var(--muted);
 }
+.og-meters .og-reset { white-space: normal; word-spacing: 0.2em; }
 
 .og-div { width: 100%; height: 1px; background: var(--line); flex: none; }
 
@@ -237,14 +238,8 @@
 .og-drawer::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.24); border-radius: 4px; }
 
 .og-drawer-head { display: flex; margin-bottom: 16px; }
-.og-lock { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; }
-.og-lock-logo { height: 21px; width: auto; display: block; }
-.og-lock-tag {
-  font-family: var(--mono); font-weight: 500; font-size: 10px;
-  letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary-light);
-  border: 1px solid var(--line); border-radius: 7px; padding: 4px 9px;
-  background: rgba(37, 99, 235, 0.1); white-space: nowrap;
-}
+.og-lock { display: flex; align-items: center; width: 100%; }
+.og-lock-logo { height: 28px; width: auto; display: block; }
 
 .og-plan {
   font-family: var(--mono); font-size: 10px; font-weight: 500;

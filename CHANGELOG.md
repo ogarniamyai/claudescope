@@ -2,6 +2,22 @@
 
 Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowanie wg [SemVer](https://semver.org/).
 
+## [1.2.0] - 2026-06-15
+
+### Zmienione
+- Rebrand: ClaudeX -> ClaudeScope. Wymieniona nazwa we wszystkich tekstach widocznych dla użytkownika (manifest, drawer, tooltipy, logi w konsoli) oraz w wewnętrznych identyfikatorach (mount id w shadow DOM, kanał message bus, beacon model-readera).
+- Logo: nowy znak (heksagon z wskaźnikiem typu „gauge") zamiast siatki neuronów. Plik `assets/mark.svg`, ikony `assets/mark-{16,32,48,128}.png` przerenderowane z `assets/icon.svg` (ciemnoniebieski zaokrąglony kwadrat + gauge) przez `sharp` z kernelem lanczos3.
+- `assets/logo-inverted.svg` zamienione: wcześniej była tam wordmark marki ogarniamy.ai, teraz pełen logotyp ClaudeScope (mark + napis) na ciemne tło. Z drawer header'a wyleciał redundantny pill „CLAUDESCOPE".
+- Mini panel: przy resecie limitu tygodniowego pokazujemy teraz nazwę dnia, np. „sobota 04:00" zamiast samej godziny. Sama godzina przy tygodniówce była myląca — nie było wiadomo, czy chodzi o jutro, czy za 5 dni. Reset 5h dalej tylko godzina (zwykle ten sam dzień).
+- Firefox extension ID podmieniony na `claudescope@ogarniamy.ai`. To oznacza nowy listing na AMO — userzy ClaudeX nie dostaną auto-update, muszą sami zainstalować ClaudeScope. ID dla CWS nie zmienia się, więc tam jest klasyczny update.
+- URL repo zmieniony z `ogarniamyai/claudex` na `ogarniamyai/claudescope` — zaktualizowane w README, PRIVACY, CHANGELOG, `config/runtime.config.json` (selfUpdate configUrl), workflows.
+- Artefakty z release.yml: `claudescope-chrome-X.Y.Z.zip` i `claudescope-firefox-X.Y.Z-source.xpi` zamiast `claudex-*`.
+- README przepisane pod technicznego czytelnika: instalacja, dev/build, mapa katalogów `src/`, prywatność, licencja. Bez screenów i copy marketingowego — to idzie na blog ogarniamy.ai.
+- Store-assets (5 obrazków 1280×800) przerenderowane: brand text po lewej, prawdziwy screen z `readme-assets/` po prawej. Nazwa ClaudeX i stare logo zniknęły, copy 01-hero i 03-modele dopieszczone.
+
+### Naprawione
+- `readme-assets/extension-prompts-per-model.png` i `extension-usage.png` przycięte, żeby pozbyć się starego logo i stopki „ClaudeX 1.0.0".
+
 ## [1.1.4] - 2026-06-13
 
 ### Naprawione
@@ -51,9 +67,10 @@ Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowan
 - Panel szczegółowy: rozkład promptów według modelu, limity sesji, szczegóły subskrypcji, mapa godzin szczytu, historia aktywności.
 - Build i automatyczna publikacja paczek `claudex-chrome-*.zip` oraz podpisanego `claudex-firefox-*.xpi` z GitHub Actions po push'u taga `v*`.
 
-[1.1.4]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.4
-[1.1.3]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.3
-[1.1.2]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.2
-[1.1.1]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.1
-[1.1.0]: https://github.com/ogarniamyai/claudex/releases/tag/v1.1.0
-[1.0.0]: https://github.com/ogarniamyai/claudex/releases/tag/v1.0.0
+[1.2.0]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.0
+[1.1.4]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.1.4
+[1.1.3]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.1.3
+[1.1.2]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.1.2
+[1.1.1]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.1.1
+[1.1.0]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.1.0
+[1.0.0]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.0.0

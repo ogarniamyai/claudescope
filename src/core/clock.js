@@ -25,6 +25,14 @@
     return pad(d.getHours()) + ":" + pad(d.getMinutes());
   }
 
+  const PL_DAYS = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
+
+  function dayName(value) {
+    const d = asDate(value);
+    if (!d) return "";
+    return PL_DAYS[d.getDay()] || "";
+  }
+
   function shortDate(value) {
     const d = asDate(value);
     if (!d) return "";
@@ -118,6 +126,7 @@
     localDayKey: localDayKey,
     shortTime: shortTime,
     shortDate: shortDate,
+    dayName: dayName,
     spanLabel: spanLabel,
     untilLabel: untilLabel,
     partsInZone: partsInZone,
