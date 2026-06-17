@@ -2,6 +2,11 @@
 
 Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowanie wg [SemVer](https://semver.org/).
 
+## [1.2.5] - 2026-06-17
+
+### Naprawione
+- Cache org id przeżywał przelogowanie. `OG.org.resolve()` trzymało `og.orgId` w `chrome.storage` bez TTL ani inwalidacji, więc po przelogowaniu z konta darmowego na płatne ekstensja dalej wołała `/api/organizations/<stary-org-id>/subscription_details`, dostawała 404 i interpretowała to jako Plan Darmowy (mimo że user był na paid). Teraz cache org id żyje tylko w pamięci content scriptu — refresh strony resetuje go i wymusza świeży probe. Persistent storage zostaje jako fallback gdy probe padnie (offline, endpoint down).
+
 ## [1.2.4] - 2026-06-17
 
 ### Dodane
@@ -87,6 +92,7 @@ Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowan
 - Panel szczegółowy: rozkład promptów według modelu, limity sesji, szczegóły subskrypcji, mapa godzin szczytu, historia aktywności.
 - Build i automatyczna publikacja paczek `claudex-chrome-*.zip` oraz podpisanego `claudex-firefox-*.xpi` z GitHub Actions po push'u taga `v*`.
 
+[1.2.5]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.5
 [1.2.4]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.4
 [1.2.3]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.3
 [1.2.2]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.2
