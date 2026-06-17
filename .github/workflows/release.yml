@@ -51,8 +51,52 @@ jobs:
             dist/claudescope-firefox-${{ steps.ver.outputs.version }}-source.xpi
           if-no-files-found: error
 
+  firefox-sign-unlisted:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Resolve version from tag
+        id: ver
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Set manifest version to <tag>-unlisted
+        run: |
+          jq --arg v "${{ steps.ver.outputs.version }}-unlisted" '.version = $v' manifest.json > manifest.tmp
+          mv manifest.tmp manifest.json
+
+      - name: Stage Firefox payload
+        run: |
+          mkdir -p firefox
+          cp -r assets config src manifest.json firefox/
+          jq '. + {browser_specific_settings: {gecko: {id: "claudescope@ogarniamy.ai", strict_min_version: "142.0", data_collection_permissions: {required: ["none"]}}}}' \
+            firefox/manifest.json > firefox/manifest.tmp
+          mv firefox/manifest.tmp firefox/manifest.json
+
+      - name: Sign with AMO (unlisted)
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: |
+          mkdir -p dist
+          npx --yes web-ext@8 sign \
+            --source-dir=firefox \
+            --artifacts-dir=dist \
+            --channel=unlisted
+
+      - name: Rename signed XPI
+        run: |
+          mv dist/*.xpi "dist/claudescope-firefox-${{ steps.ver.outputs.version }}-unlisted.xpi"
+
+      - name: Upload signed XPI
+        uses: actions/upload-artifact@v5
+        with:
+          name: firefox-unlisted
+          path: dist/claudescope-firefox-${{ steps.ver.outputs.version }}-unlisted.xpi
+          if-no-files-found: error
+
   publish:
-    needs: [build-web]
+    needs: [build-web, firefox-sign-unlisted]
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
