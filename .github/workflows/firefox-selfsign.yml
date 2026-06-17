@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Wersja XPI do self-distribution (np. 1.2.4-unlisted). MUSI rozni sie od kazdej wersji ktora kiedykolwiek poszla na AMO listed - kazdy upload na unlisted blokuje ten numer dla listed.'
+        description: 'Wersja XPI do self-distribution. AMO przyjmuje TYLKO 1-4 liczb oddzielonych kropkami (bez liter, bez myslnikow). Konwencja: <listed>.N, np. 1.2.4.1, 1.2.4.2. MUSI rozni sie od kazdej wersji listed, bo upload na unlisted blokuje numer dla listed.'
         required: true
         type: string
       release_tag:
