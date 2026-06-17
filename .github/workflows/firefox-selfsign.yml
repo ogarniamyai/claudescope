@@ -1,0 +1,64 @@
+name: firefox-selfsign
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Wersja XPI do self-distribution (np. 1.2.4-unlisted). MUSI rozni sie od kazdej wersji ktora kiedykolwiek poszla na AMO listed - kazdy upload na unlisted blokuje ten numer dla listed.'
+        required: true
+        type: string
+      release_tag:
+        description: 'Tag GitHub release, do ktorego dolaczyc podpisany XPI (np. v1.2.4). Pomin, zeby tylko zostawic jako artifact workflow runa.'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set manifest version
+        run: |
+          jq --arg v "${{ inputs.version }}" '.version = $v' manifest.json > manifest.tmp
+          mv manifest.tmp manifest.json
+
+      - name: Stage Firefox payload
+        run: |
+          mkdir -p firefox
+          cp -r assets config src manifest.json firefox/
+          jq '. + {browser_specific_settings: {gecko: {id: "claudescope@ogarniamy.ai", strict_min_version: "142.0", data_collection_permissions: {required: ["none"]}}}}' \
+            firefox/manifest.json > firefox/manifest.tmp
+          mv firefox/manifest.tmp firefox/manifest.json
+
+      - name: Sign with AMO (unlisted)
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        run: |
+          mkdir -p dist
+          npx --yes web-ext@8 sign \
+            --source-dir=firefox \
+            --artifacts-dir=dist \
+            --channel=unlisted
+
+      - name: Rename signed XPI
+        run: |
+          mv dist/*.xpi "dist/claudescope-firefox-${{ inputs.version }}.xpi"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: firefox-signed
+          path: dist/claudescope-firefox-${{ inputs.version }}.xpi
+          if-no-files-found: error
+
+      - name: Attach to GitHub release
+        if: inputs.release_tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "${{ inputs.release_tag }}" "dist/claudescope-firefox-${{ inputs.version }}.xpi" --clobber
