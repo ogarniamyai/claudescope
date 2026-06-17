@@ -30,7 +30,12 @@
     const dialCap = document.createElement("div");
     dialCap.className = "og-cap";
     dialCap.textContent = "subskrypcja";
+    const freePlan = document.createElement("div");
+    freePlan.className = "og-freeplan";
+    freePlan.textContent = "Plan darmowy";
+    freePlan.style.display = "none";
     dialStack.appendChild(dial.el);
+    dialStack.appendChild(freePlan);
     dialStack.appendChild(dialCap);
 
     const watch = OG.stopwatch.create("aktywność");
@@ -83,7 +88,10 @@
         session.update(snap.session.pct, snap.session.reset);
         week.update(snap.week.pct, snap.week.reset);
       }
-      if (cycle) {
+      const isFree = !!(cycle && cycle.free);
+      dial.el.style.display = isFree ? "none" : "";
+      freePlan.style.display = isFree ? "block" : "none";
+      if (cycle && !isFree) {
         const date = snap && snap.billing ? OG.clock.shortDate(snap.billing.nextChargeDate) : "";
         dial.update(cycle.percent, cycle.daysLeft, "Przygotuj się do opłacenia subskrypcji" + (date ? " (" + date + ")" : ""));
       }

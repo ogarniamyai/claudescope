@@ -179,6 +179,23 @@
 .og-dial-val { font-family: var(--mono); font-size: 15px; font-weight: 600; color: var(--paper); }
 .og-dial-sub { font-family: var(--mono); font-size: 8px; color: var(--muted); }
 
+.og-freeplan {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary-light);
+  text-align: center;
+  line-height: 1.1;
+}
+.og-freeplan-big {
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  padding: 4px 4px 6px;
+  text-align: left;
+}
+
 .og-alert {
   position: absolute; top: -5px; right: -5px;
   width: 18px; height: 18px;

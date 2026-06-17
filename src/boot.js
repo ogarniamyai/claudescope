@@ -11,6 +11,7 @@
 
   function cycleNow() {
     if (!snap || !snap.billing) return null;
+    if (snap.billing.free) return { free: true };
     const target = snap.billing.nextChargeInstant || snap.billing.nextChargeDate;
     return OG.clock.cycleProgress(new Date(), target, snap.billing.interval);
   }
@@ -32,7 +33,7 @@
           snap.error = fresh.error;
           if (fresh.session.pct != null) snap.session = fresh.session;
           if (fresh.week.pct != null) snap.week = fresh.week;
-          if (fresh.billing.nextChargeDate != null) snap.billing = fresh.billing;
+          if (fresh.billing.nextChargeDate != null || fresh.billing.free) snap.billing = fresh.billing;
         } else {
           snap = fresh;
         }

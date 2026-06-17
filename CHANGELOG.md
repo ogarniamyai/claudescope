@@ -2,6 +2,11 @@
 
 Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowanie wg [SemVer](https://semver.org/).
 
+## [1.2.4] - 2026-06-17
+
+### Dodane
+- Plan darmowy w panelu subskrypcji. Endpoint `/api/organizations/{org}/subscription_details` na kontach free zwraca 404 — ClaudeScope traktuje to teraz jako sygnał „Plan darmowy" zamiast błędu fetcha. W mini pasku i w głównym panelu zamiast kółka z procentami i dniami do końca cyklu pokazujemy duży napis „Plan darmowy". Wcześniej free userzy widzieli czerwony banner „Nie udało się pobrać danych subskrypcji." bo 404 leciało do tej samej ścieżki co realne błędy 5xx.
+
 ## [1.2.3] - 2026-06-15
 
 ### Zmienione
@@ -82,6 +87,7 @@ Format wzorowany na [Keep a Changelog](https://keepachangelog.com/), wersjonowan
 - Panel szczegółowy: rozkład promptów według modelu, limity sesji, szczegóły subskrypcji, mapa godzin szczytu, historia aktywności.
 - Build i automatyczna publikacja paczek `claudex-chrome-*.zip` oraz podpisanego `claudex-firefox-*.xpi` z GitHub Actions po push'u taga `v*`.
 
+[1.2.4]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.4
 [1.2.3]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.3
 [1.2.2]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.2
 [1.2.1]: https://github.com/ogarniamyai/claudescope/releases/tag/v1.2.1

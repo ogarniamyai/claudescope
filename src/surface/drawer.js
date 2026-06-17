@@ -82,6 +82,11 @@
     subGrid.appendChild(rings);
     subGrid.appendChild(rows);
     subCard.appendChild(subGrid);
+    const subFree = document.createElement("div");
+    subFree.className = "og-freeplan og-freeplan-big";
+    subFree.textContent = "Plan darmowy";
+    subFree.style.display = "none";
+    subCard.appendChild(subFree);
 
     const peakCard = card("Peak hours");
     const clock = OG.clockface
@@ -148,14 +153,19 @@
 
     function render(snap, peakState, cycle) {
       drawNotices(snap);
+      const isFree = !!(snap && snap.billing && snap.billing.free);
+      subGrid.style.display = isFree ? "none" : "";
+      subFree.style.display = isFree ? "block" : "none";
       if (snap) {
-        rStatus.val.textContent = OG.labels.status(snap.billing.status);
-        rInterval.val.textContent = OG.labels.interval(snap.billing.interval);
-        rNext.val.textContent = OG.clock.shortDate(snap.billing.nextChargeDate) || "-";
+        if (!isFree) {
+          rStatus.val.textContent = OG.labels.status(snap.billing.status);
+          rInterval.val.textContent = OG.labels.interval(snap.billing.interval);
+          rNext.val.textContent = OG.clock.shortDate(snap.billing.nextChargeDate) || "-";
+        }
         mSession.update(snap.session.pct, snap.session.reset);
         mWeek.update(snap.week.pct, snap.week.reset);
       }
-      if (cycle) {
+      if (cycle && !isFree) {
         ring.update(cycle.percent, cycle.daysLeft, "Przygotuj się do opłacenia subskrypcji");
         rLeft.val.textContent = cycle.daysLeft == null ? "-" : cycle.daysLeft + (cycle.daysLeft === 1 ? " dzień" : " dni");
       }
